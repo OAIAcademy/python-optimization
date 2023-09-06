@@ -1,5 +1,8 @@
+import math
 import random
+
 import numpy as np
+
 np.random.seed(0)
 random.seed(0)
 
@@ -23,7 +26,7 @@ def score(solution):
 
 
 def mutation(solution):
-    i = random.randint(0, solution.size-1)
+    i = random.randint(0, solution.size - 1)
     ret = np.copy(solution)
     ret[i] = (solution[i] + 1) % 2
     return ret
@@ -34,6 +37,14 @@ def all_neighbourhood(solution):
         ret = np.copy(solution)
         ret[i] = (solution[i] + 1) % 2
         yield ret
+
+
+def hybrid(sol1, sol2):
+    ret = np.copy(sol1)
+    for i in np.random.choice(np.array([i for i in range(0, len(sol1))]), size=random.randint(0, len(sol1)),
+                              replace=False):
+        ret[i] = sol2[i]
+    return ret
 
 
 if __name__ == '__main__':

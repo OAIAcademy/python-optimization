@@ -4,7 +4,7 @@ random.seed(0)
 
 import time
 
-from examples.problems import knapsack, travelling_salesman, function
+from examples.problems import knapsack, travelling_salesman, polynomial
 
 
 def stochastics_gradient(start, mutation, score):
@@ -36,8 +36,8 @@ if __name__ == '__main__':
         if time.time() - t >= 10:
             break
     print("Poli")
-    for score, sol in stochastics_gradient(function.random_solution(), function.mutation,
-                                           function.score):
+    for score, sol in stochastics_gradient(polynomial.random_solution(), polynomial.mutation,
+                                           polynomial.score):
         print(score)
         if time.time() - t >= 3:
             break
