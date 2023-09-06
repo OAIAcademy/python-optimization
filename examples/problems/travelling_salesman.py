@@ -1,6 +1,8 @@
 import numpy as np
-
-SIZE = 20
+import random
+np.random.seed(0)
+random.seed(0)
+SIZE = 40
 
 graph = np.random.randint(0, 100, size=(SIZE, SIZE))
 
@@ -29,3 +31,9 @@ def mutation(solution):
     return ret
 
 
+def all_neighbourhood(solution):
+    for i in range(0, SIZE - 2):
+        for j in range(i + 1, SIZE - 1):
+            ret = np.copy(solution)
+            ret[i], ret[j] = ret[j], ret[i]
+            yield ret

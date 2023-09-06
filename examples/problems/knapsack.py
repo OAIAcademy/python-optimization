@@ -1,7 +1,9 @@
 import random
 import numpy as np
+np.random.seed(0)
+random.seed(0)
 
-SIZE = 50
+SIZE = 100
 CAPACITY = 100
 
 values = np.random.randint(1, 100, size=SIZE)
@@ -17,14 +19,21 @@ def random_solution():
 def score(solution):
     score = (solution * values).sum()
     score -= 0 if (solution * weight).sum() <= CAPACITY else ((solution * weight).sum() - CAPACITY) * RELAX_COST
-    return score
+    return -score
 
 
 def mutation(solution):
-    i = random.randint(0, solution.size)
+    i = random.randint(0, solution.size-1)
     ret = np.copy(solution)
     ret[i] = (solution[i] + 1) % 2
     return ret
+
+
+def all_neighbourhood(solution):
+    for i in range(0, SIZE):
+        ret = np.copy(solution)
+        ret[i] = (solution[i] + 1) % 2
+        yield ret
 
 
 if __name__ == '__main__':

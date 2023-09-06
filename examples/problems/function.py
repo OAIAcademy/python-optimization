@@ -1,6 +1,7 @@
 import random
-
 import numpy as np
+np.random.seed(0)
+random.seed(0)
 
 SIZE = 10
 degree2 = np.random.randint(0, 100, size=(SIZE))
@@ -22,7 +23,7 @@ def score(solution):
 
 def mutation(solution):
     ret = np.copy(solution)
-    i = random.randint(0, solution.size)
+    i = random.randint(0, solution.size-1)
     ret[i] += ret[i] * np.random.normal(0, 0.1)
     return ret
 
