@@ -4,7 +4,7 @@ random.seed(0)
 
 import time
 
-from examples.problems import knapsack, travelling_salesman,polynomial
+from examples.problems import knapsack, travelling_salesman, polynomial, scheduling
 
 
 def anealing(start, mutation, score, max_time):
@@ -42,4 +42,9 @@ if __name__ == '__main__':
     print("poli")
     for score, sol in anealing(polynomial.random_solution(), polynomial.mutation,
                                polynomial.score, max_time=5):
+        print(score)
+
+    print("scheduling")
+    for score, sol in anealing(scheduling.random_solution(), scheduling.mutation,
+                               scheduling.score, 3):
         print(score)

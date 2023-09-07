@@ -4,7 +4,7 @@ random.seed(0)
 
 import time
 
-from examples.problems import knapsack, travelling_salesman
+from examples.problems import knapsack, travelling_salesman,scheduling
 
 
 def gradient(start, neigh, score):
@@ -32,6 +32,13 @@ if __name__ == '__main__':
     t = time.time()
     for score, sol in gradient(travelling_salesman.random_solution(), travelling_salesman.all_neighbourhood,
                                travelling_salesman.score):
+        print(score)
+        if time.time() - t >= 10:
+            break
+    print("scheduling")
+    t = time.time()
+    for score, sol in gradient(scheduling.random_solution(), scheduling.all_neighbourhood,
+                               scheduling.score):
         print(score)
         if time.time() - t >= 10:
             break

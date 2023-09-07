@@ -4,7 +4,7 @@ random.seed(0)
 
 import time
 
-from examples.problems import knapsack, travelling_salesman
+from examples.problems import knapsack, travelling_salesman, scheduling
 
 
 def tabu(start, neigh, score, max_time):
@@ -36,4 +36,9 @@ if __name__ == '__main__':
 
     for score, sol in tabu(travelling_salesman.random_solution(), travelling_salesman.all_neighbourhood,
                            travelling_salesman.score, max_time=3):
+        print(score)
+
+    print("scheduling")
+    for score, sol in tabu(scheduling.random_solution(), scheduling.all_neighbourhood,
+                           scheduling.score, 3):
         print(score)

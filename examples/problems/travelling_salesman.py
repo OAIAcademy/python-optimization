@@ -1,5 +1,6 @@
 import numpy as np
 import random
+
 np.random.seed(0)
 random.seed(0)
 SIZE = 40
@@ -37,3 +38,10 @@ def all_neighbourhood(solution):
             ret = np.copy(solution)
             ret[i], ret[j] = ret[j], ret[i]
             yield ret
+
+
+if __name__ == '__main__':
+    print(random_solution())
+    print(score(random_solution()))
+    print(mutation(random_solution()))
+    print(len([i for i in all_neighbourhood(random_solution())]))

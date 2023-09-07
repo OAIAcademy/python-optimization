@@ -6,7 +6,7 @@ random.seed(0)
 
 import time
 
-from examples.problems import knapsack, travelling_salesman, polynomial
+from examples.problems import knapsack, travelling_salesman, polynomial, scheduling
 
 
 def genetic(random_sol, mutation, hybrid, score, max_time):
@@ -34,12 +34,12 @@ if __name__ == '__main__':
     for score, sol in genetic(knapsack.random_solution, knapsack.mutation, knapsack.hybrid, knapsack.score, max_time=5):
         print(score)
 
-    # print("salesman")
-    # for score, sol in genetic(travelling_salesman.random_solution, travelling_salesman.mutation,
-    #                           travelling_salesman.score, max_time=5):
-    #     print(score)
-    #
     print("poli")
     for score, sol in genetic(polynomial.random_solution, polynomial.mutation, knapsack.hybrid,
                               polynomial.score, max_time=5):
+        print(score)
+
+    print("scheduling")
+    for score, sol in genetic(scheduling.random_solution, scheduling.mutation, scheduling.hybrid,
+                              scheduling.score, max_time=5):
         print(score)
