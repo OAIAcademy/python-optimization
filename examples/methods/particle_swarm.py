@@ -8,16 +8,18 @@ import time
 from examples.problems import knapsack, travelling_salesman, polynomial, scheduling
 
 
-def particle_swarm(random_sol, mutation, score, max_time):
+def particle_swarm(random_sol, mutation, score, max_time,pop_size=100, data=None):
     T = 100
-    sol = [random_sol() for _ in range(0, 100)]
+    sol = [random_sol() for _ in range(0, pop_size)]
     best = sol[0]
     t = time.time()
     while True:
+        if data is not None:
+            data.append((np.array([score(sol[i]) for i in range(len(sol))]), sol.copy()))
         if time.time() - t >= max_time:
             break
         for part in range(0, len(sol)):
-            new_sol = min([(score(i), i) for i in [mutation(sol[part]) for _ in range(0, 50)]], key=lambda x: x[0])[1]
+            new_sol = min([(score(i), i) for i in [mutation(sol[part]) for _ in range(len(sol))]], key=lambda x: x[0])[1]
             if score(new_sol) < score(best):
                 best = new_sol
                 yield score(best), best

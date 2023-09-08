@@ -9,14 +9,16 @@ import time
 from examples.problems import knapsack, travelling_salesman, polynomial, scheduling
 
 
-def genetic(random_sol, mutation, hybrid, score, max_time):
-    pop = [random_sol() for _ in range(0, 1000)]
+def genetic(random_sol, mutation, hybrid, score, max_time,pop_size=1000, data=None):
+    pop = [random_sol() for _ in range(0, pop_size)]
     best = min([(score(i), i) for i in pop], key=lambda x: x[0])[1]
     t = time.time()
     while True:
         if time.time() - t >= max_time:
             break
         fitnesses = np.array([score(i) for i in pop])
+        if data is not None:
+            data.append((np.copy(fitnesses), pop.copy()))
         fitnesses = -(fitnesses - max(fitnesses))
         fitnesses = fitnesses / fitnesses.sum()
         couples = np.random.choice(np.array([i for i in range(0, len(pop))]), size=len(pop) * 2, p=fitnesses)
